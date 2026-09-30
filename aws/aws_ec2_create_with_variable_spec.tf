@@ -54,8 +54,7 @@ resource "aws_instance" "aditya_instance" {
   instance_type     = var.aditya_aws_instance_type
   ami               = var.aditya_aws_instance_ami
 
-  # Run Script file to install Nginx on the EC2 instance 
-  user_data = file("install_nginx.sh")
+ 
 
 
   root_block_device {
