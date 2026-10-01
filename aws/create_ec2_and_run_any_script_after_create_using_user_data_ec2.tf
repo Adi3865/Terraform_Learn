@@ -13,7 +13,7 @@ resource "aws_security_group" "aditya_security_group" {
   name        = var.aditya_aws_instance_security_group
   description = "Allow SSH and HTTP inbound traffic"
   vpc_id      = aws_default_vpc.default.id
-
+# ingress for security group to allow inbound traffic to the internet
   ingress {
     from_port   = 22
     to_port     = 22
@@ -37,7 +37,7 @@ resource "aws_security_group" "aditya_security_group" {
     cidr_blocks = ["0.0.0.0/0"]
     description = "Allow HTTPS access from anywhere"
   }
-
+# egres for security group to allow outbound traffic to the internet
   egress {
     from_port   = 0
     to_port     = 0
@@ -55,7 +55,9 @@ resource "aws_instance" "aditya_instance" {
   ami               = var.aditya_aws_instance_ami
 
   # Run Script file to install Nginx on the EC2 instance 
-  user_data = file("install_nginx.sh")
+  user_data = file("install_nginx.sh","docker_intall.sh")
+  
+  
 
 
   root_block_device {
